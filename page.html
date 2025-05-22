@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ZoomerSnail (ZNAIL) - Meme Coin on Solana</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&family=Roboto&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script type="module" src="https://unpkg.com/@solana/wallet-adapter-wallets"></script>
+  <script type="module" src="https://unpkg.com/@solana/wallet-adapter-react"></script>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Roboto', sans-serif;
+      background: #0e0e0e;
+      color: #e5e5e5;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+    header {
+      padding: 2rem 1rem;
+    }
+    header h1 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 3rem;
+      color: #7cf28f;
+    }
+    .logo {
+      max-width: 180px;
+      margin-bottom: 1rem;
+    }
+    .tagline {
+      font-size: 1.2rem;
+      color: #b9b9b9;
+      margin-bottom: 2rem;
+    }
+    .section {
+      max-width: 800px;
+      padding: 2rem 1rem;
+    }
+    .section h2 {
+      color: #a88df1;
+    }
+    .cta {
+      margin-top: 2rem;
+    }
+    .btn {
+      background: #7cf28f;
+      color: #0e0e0e;
+      padding: 0.75rem 1.5rem;
+      border-radius: 25px;
+      font-weight: bold;
+      text-decoration: none;
+      transition: background 0.3s;
+    }
+    .btn:hover {
+      background: #63d47a;
+    }
+    footer {
+      padding: 1rem;
+      font-size: 0.9rem;
+      color: #777;
+    }
+    canvas {
+      background: #1c1c1c;
+      border-radius: 12px;
+      padding: 1rem;
+    }
+    .nft-gallery img {
+      width: 120px;
+      margin: 10px;
+      border-radius: 12px;
+      border: 2px solid #7cf28f;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <img src="logo.png" alt="ZNAIL Logo" class="logo">
+    <h1>ZoomerSnail (ZNAIL)</h1>
+    <p class="tagline">The fastest blockchain meets the slowest animal. Together, they redefine time.</p>
+    <button class="btn" onclick="connectWallet()">Connect Wallet</button>
+  </header>
+
+  <div class="section">
+    <h2>Why ZNAIL?</h2>
+    <p>
+      In a world racing toward the next meme coin, ZNAIL invites you to pause and ride the ironic wave of speed on Solana. A snail with a rocket. A meme with meaning.
+    </p>
+    <p>
+      ZNAIL isn’t just a coin, it’s a mindset. Slow down, think fast, and degen responsibly.
+    </p>
+  </div>
+
+  <div class="section">
+    <h2>Tokenomics</h2>
+    <canvas id="tokenomicsChart" width="400" height="400"></canvas>
+  </div>
+
+  <div class="section">
+    <h2>Live ZNAIL Stats</h2>
+    <p id="solanaPrice">Loading price...</p>
+    <p id="znailStats">Fetching data...</p>
+  </div>
+
+  <div class="section">
+    <h2>ZNAIL NFT Previews</h2>
+    <div class="nft-gallery">
+      <img src="https://via.placeholder.com/120?text=Snail+1" alt="NFT 1">
+      <img src="https://via.placeholder.com/120?text=Snail+2" alt="NFT 2">
+      <img src="https://via.placeholder.com/120?text=Snail+3" alt="NFT 3">
+    </div>
+  </div>
+
+  <div class="cta">
+    <a href="#" class="btn">Join the Snailution</a>
+  </div>
+
+  <footer>
+    &copy; 2025 ZNAIL Coin. Built on Solana with slow love.
+  </footer>
+
+  <script>
+    // Wallet connect mock function (integration with real Solana adapter needed)
+    function connectWallet() {
+      alert('Wallet connect coming soon!');
+    }
+
+    // Tokenomics chart
+    const ctx = document.getElementById('tokenomicsChart').getContext('2d');
+    new Chart(ctx, {
+      type: 'doughnut',
+      data: {
+        labels: ['Community (50%)', 'Staking (25%)', 'Marketing (15%)', 'Dev Fund (10%)'],
+        datasets: [{
+          label: 'ZNAIL Token Distribution',
+          data: [50, 25, 15, 10],
+          backgroundColor: ['#7cf28f', '#a88df1', '#f1cb88', '#f17474'],
+          borderColor: '#0e0e0e',
+          borderWidth: 2
+        }]
+      },
+      options: {
+        plugins: { legend: { labels: { color: '#e5e5e5' } } }
+      }
+    });
+
+    // Live Solana price & placeholder token data
+    async function fetchSolanaData() {
+      try {
+        const res = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=solana&vs_currencies=usd');
+        const data = await res.json();
+        document.getElementById('solanaPrice').innerText = `SOL Price: $${data.solana.usd}`;
+        document.getElementById('znailStats').innerText = 'Supply: 1,000,000,000 | Holders: 3,421'; // Replace with real
+      } catch (err) {
+        console.error(err);
+        document.getElementById('solanaPrice').innerText = 'Failed to load SOL price.';
+      }
+    }
+    fetchSolanaData();
+  </script>
+</body>
+</html>
